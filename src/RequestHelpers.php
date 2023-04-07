@@ -14,6 +14,20 @@ class RequestHelpers
 	}
 
 	/**
+	 * Determine if a web request was made over HTTPS
+	 *
+	 * @return bool|null
+	 */
+	public static function isRequestHttps(): ?bool
+	{
+		if (!self::isWebRequest()) {
+			return null;
+		}
+
+		return ((!empty($_SERVER['HTTPS'])) && ($_SERVER['HTTPS'] !== 'off'));
+	}
+
+	/**
 	 * Get the requested URL of a web request
 	 *
 	 * @param bool $includeQueryString
@@ -26,7 +40,7 @@ class RequestHelpers
 		}
 
 		$url = 'http';
-		if ((!empty($_SERVER['HTTPS'])) && ($_SERVER['HTTPS'] !== 'off')) {
+		if (self::isRequestHttps()) {
 			$url .= 's';
 		}
 
