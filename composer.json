@@ -1,0 +1,27 @@
+{
+  "name": "cjrasmussen/request",
+  "description": "Simple functions for working with information about web requests",
+  "version": "1.0.0",
+  "homepage": "https://cjr.dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Clark Rasmussen",
+      "homepage": "https://cjr.dev",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/cjrasmussen/Request/issues",
+    "source": "https://github.com/cjrasmussen/Request"
+  },
+  "require": {
+    "php": ">=7.1.0",
+    "ext-ctype": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "cjrasmussen\\Request\\": "src/"
+    }
+  }
+}
