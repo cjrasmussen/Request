@@ -15,9 +15,9 @@ class RequestCollectionTest extends TestCase
 
 		$collection = new RequestCollection($array);
 
-		$this->assertEquals(count($array), $collection->count());
-		$this->assertEquals($array['alpha'], $collection->get('alpha'));
-		$this->assertEquals($array['beta'], $collection->get('beta'));
-		$this->assertEquals($array['gamma'], $collection->get('gamma'));
+		$this->assertSame(count($array), $collection->count());
+		$this->assertSame($array['alpha'], $collection->get('alpha'));
+		$this->assertSame($array['beta'], $collection->get('beta'));
+		$this->assertSame($array['gamma'], $collection->get('gamma'));
 	}
 }
