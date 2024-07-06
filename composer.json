@@ -1,7 +1,7 @@
 {
   "name": "cjrasmussen/request",
-  "description": "Simple functions for working with information about web requests",
-  "version": "1.0.1",
+  "description": "Helper class for working with information about web requests",
+  "version": "2.0.0",
   "homepage": "https://cjr.dev",
   "license": "MIT",
   "authors": [
@@ -16,8 +16,11 @@
     "source": "https://github.com/cjrasmussen/Request"
   },
   "require": {
-    "php": ">=7.1.0",
-    "ext-ctype": "*"
+    "php": ">=7.4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.6",
+    "roave/security-advisories": "dev-latest"
   },
   "autoload": {
     "psr-4": {

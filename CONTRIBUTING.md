@@ -22,11 +22,10 @@ it turned down, please start the discussion by
 
 ### Testing
 
-Should there be tests for this?  Yes.  Am I lazy?  Also yes.  Am I going to hold 
-someone to standards I don't hold myself to?  No.
+Try to leave the test cases better than you found them.
 
 
 ## License
 
-Note that CpanelApi is MIT-licensed, which basically allows anyone to do
+Note that Request is MIT-licensed, which basically allows anyone to do
 anything they like with it, without restriction.
