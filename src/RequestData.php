@@ -41,8 +41,8 @@ class RequestData
 		$this->method = ($this->server->has('REQUEST_METHOD')) ? $this->server->get('REQUEST_METHOD') : self::METHOD_NONE;
 		$this->timestamp = time();
 
-		// spoof the form method to allow for PUT, PATCH, DELETE
-		if ($this->method === self::METHOD_POST) {
+		// pull incoming data out of POST for PUT, PATCH, DELETE
+		if (in_array($this->method, [self::METHOD_PUT, self::METHOD_PATCH, self::METHOD_DELETE], true)) {
 			$incomingData = $post;
 			$post = [];
 		} else {

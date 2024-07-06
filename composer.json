@@ -1,7 +1,7 @@
 {
   "name": "cjrasmussen/request",
   "description": "Helper class for working with information about web requests",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "homepage": "https://cjr.dev",
   "license": "MIT",
   "authors": [

@@ -83,6 +83,69 @@ class RequestDataTest extends TestCase
 		$this->assertEquals(stripslashes($get['stringSlashes']), $requestData->query->get('stringSlashes'));
 	}
 
+	public function testPostRequest(): void
+	{
+		$post = [
+			'foo' => 'bar',
+		];
+		$server = [
+			'REQUEST_METHOD' => 'POST',
+		];
+
+		$requestData = new RequestData([], $post, [], [], $server, []);
+
+		$this->assertSame(1, $requestData->post->count());
+		$this->assertSame($post['foo'], $requestData->post->get('foo'));
+	}
+
+	public function testDeleteRequest(): void
+	{
+		$post = [
+			'foo' => 'bar',
+		];
+		$server = [
+			'REQUEST_METHOD' => 'DELETE',
+		];
+
+		$requestData = new RequestData([], $post, [], [], $server, []);
+
+		$this->assertSame(0, $requestData->post->count());
+		$this->assertSame(1, $requestData->delete->count());
+		$this->assertSame($post['foo'], $requestData->delete->get('foo'));
+	}
+
+	public function testPatchRequest(): void
+	{
+		$post = [
+			'foo' => 'bar',
+		];
+		$server = [
+			'REQUEST_METHOD' => 'PATCH',
+		];
+
+		$requestData = new RequestData([], $post, [], [], $server, []);
+
+		$this->assertSame(0, $requestData->post->count());
+		$this->assertSame(1, $requestData->patch->count());
+		$this->assertSame($post['foo'], $requestData->patch->get('foo'));
+	}
+
+	public function testPutRequest(): void
+	{
+		$post = [
+			'foo' => 'bar',
+		];
+		$server = [
+			'REQUEST_METHOD' => 'PUT',
+		];
+
+		$requestData = new RequestData([], $post, [], [], $server, []);
+
+		$this->assertSame(0, $requestData->post->count());
+		$this->assertSame(1, $requestData->put->count());
+		$this->assertSame($post['foo'], $requestData->put->get('foo'));
+	}
+
 	public function testUploadedFileSanitization(): void
 	{
 		$files = [
