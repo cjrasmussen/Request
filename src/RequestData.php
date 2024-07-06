@@ -96,7 +96,7 @@ class RequestData
 				}
 
 				if (is_string($value)) {
-					$value = trim($value);
+					$value = stripslashes(trim($value));
 				}
 
 				if (is_numeric($value)) {

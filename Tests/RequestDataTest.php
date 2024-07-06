@@ -37,6 +37,7 @@ class RequestDataTest extends TestCase
 			'float' => 66.66667,
 			'int' => 6789,
 			'stringPadded' => '     lorem ipsum dolor sit    ',
+			'stringSlashes' => '\"This is some quoted text\"',
 		];
 
 		$requestData = new RequestData($get, [], [], [], [], []);
@@ -77,6 +78,9 @@ class RequestDataTest extends TestCase
 
 		$this->assertEquals($get['stringPadded'], $requestData->getRawData(RequestData::METHOD_GET)->get('stringPadded'));
 		$this->assertEquals(trim($get['stringPadded']), $requestData->query->get('stringPadded'));
+
+		$this->assertEquals($get['stringSlashes'], $requestData->getRawData(RequestData::METHOD_GET)->get('stringSlashes'));
+		$this->assertEquals(stripslashes($get['stringSlashes']), $requestData->query->get('stringSlashes'));
 	}
 
 	public function testUploadedFileSanitization(): void
