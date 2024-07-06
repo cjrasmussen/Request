@@ -1,18 +1,23 @@
 # Request
 
-Simple functions for working with information about web requests.
+Helper class for working with information about web requests. Useful for accessing request data in an object-oriented fashion.
 
 
 ## Usage
 
 ```php
-use cjrasmussen\Request\RequestHelpers;
+use cjrasmussen\Request\RequestData;
 
-$isWebRequest = RequestHelpers::isWebRequest();
+$requestData = new RequestData($_GET, $_POST, $_COOKIES, $_FILES, $_SERVER, $_ENV);
+
+$isWebRequest = $requestData->isWebRequest();
 
 if ($isWebRequest) {
-    $url = RequestHelpers::getRequestedUrl();
+    $url = $requestData->getRequestedUrl();
 }
+
+// access $_GET['id']
+$requestData->query->get('id');
 ```
 
 ## Installation
