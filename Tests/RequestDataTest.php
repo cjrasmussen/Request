@@ -36,6 +36,7 @@ class RequestDataTest extends TestCase
 			'stringIntZeros' => '000000328765',
 			'float' => 66.66667,
 			'int' => 6789,
+			'stringPadded' => '     lorem ipsum dolor sit    ',
 		];
 
 		$requestData = new RequestData($get, [], [], [], [], []);
@@ -73,6 +74,9 @@ class RequestDataTest extends TestCase
 		$this->assertSame($get['stringIntZeros'], $requestData->query->get('stringIntZeros'));
 		$this->assertSame($get['float'], $requestData->query->get('float'));
 		$this->assertSame($get['int'], $requestData->query->get('int'));
+
+		$this->assertEquals($get['stringPadded'], $requestData->getRawData(RequestData::METHOD_GET)->get('stringPadded'));
+		$this->assertEquals(trim($get['stringPadded']), $requestData->query->get('stringPadded'));
 	}
 
 	public function testUploadedFileSanitization(): void

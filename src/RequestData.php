@@ -92,13 +92,21 @@ class RequestData
 			if ($value !== null) {
 				if (is_iterable($value)) {
 					$input[$key] = $this->sanitizeCollection($value);
-				} elseif (is_numeric($value)) {
+					continue;
+				}
+
+				if (is_string($value)) {
+					$value = trim($value);
+				}
+
+				if (is_numeric($value)) {
 					$potential_decimals = substr_count($value, '.');
 					if ($potential_decimals === 1) {
 						// potential float
 						if ($check = filter_var($value, FILTER_VALIDATE_FLOAT)) {
 							// passes float check
 							$input[$key] = $check;
+							continue;
 						}
 					} elseif ($potential_decimals === 0) {
 						// potential int
@@ -115,10 +123,13 @@ class RequestData
 							if ((strpos($value, '0') !== 0) || (strlen($value) === 1)) {
 								// does not have leading zeros
 								$input[$key] = (int)$value * $multiplier;
+								continue;
 							}
 						}
 					}
 				}
+
+				$input[$key] = $value;
 			}
 		}
 
