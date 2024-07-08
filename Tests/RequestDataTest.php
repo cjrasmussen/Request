@@ -38,6 +38,8 @@ class RequestDataTest extends TestCase
 			'int' => 6789,
 			'stringPadded' => '     lorem ipsum dolor sit    ',
 			'stringSlashes' => '\"This is some quoted text\"',
+			'stringEmpty' => '',
+			'stringIntZero' => '0',
 		];
 
 		$requestData = new RequestData($get, [], [], [], [], []);
@@ -76,11 +78,17 @@ class RequestDataTest extends TestCase
 		$this->assertSame($get['float'], $requestData->query->get('float'));
 		$this->assertSame($get['int'], $requestData->query->get('int'));
 
-		$this->assertEquals($get['stringPadded'], $requestData->getRawData(RequestData::METHOD_GET)->get('stringPadded'));
-		$this->assertEquals(trim($get['stringPadded']), $requestData->query->get('stringPadded'));
+		$this->assertSame($get['stringPadded'], $requestData->getRawData(RequestData::METHOD_GET)->get('stringPadded'));
+		$this->assertSame(trim($get['stringPadded']), $requestData->query->get('stringPadded'));
 
-		$this->assertEquals($get['stringSlashes'], $requestData->getRawData(RequestData::METHOD_GET)->get('stringSlashes'));
-		$this->assertEquals(stripslashes($get['stringSlashes']), $requestData->query->get('stringSlashes'));
+		$this->assertSame($get['stringSlashes'], $requestData->getRawData(RequestData::METHOD_GET)->get('stringSlashes'));
+		$this->assertSame(stripslashes($get['stringSlashes']), $requestData->query->get('stringSlashes'));
+
+		$this->assertSame($get['stringEmpty'], $requestData->getRawData(RequestData::METHOD_GET)->get('stringEmpty'));
+		$this->assertNull($requestData->query->get('stringEmpty'));
+
+		$this->assertSame($get['stringIntZero'], $requestData->getRawData(RequestData::METHOD_GET)->get('stringIntZero'));
+		$this->assertSame(0, $requestData->query->get('stringIntZero'));
 	}
 
 	public function testPostRequest(): void

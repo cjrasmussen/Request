@@ -129,6 +129,10 @@ class RequestData
 					}
 				}
 
+				if ($value === '') {
+					$value = null;
+				}
+
 				$input[$key] = $value;
 			}
 		}
