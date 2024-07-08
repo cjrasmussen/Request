@@ -53,7 +53,7 @@ class RequestCollection implements ArrayAccess, Countable, Iterator
 	 */
 	public function has($key): bool
 	{
-		return array_key_exists($key, $this->array);
+		return ((array_key_exists($key, $this->array)) && ($this->array[$key] !== null));
 	}
 
 	/**
