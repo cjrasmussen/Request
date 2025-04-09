@@ -151,6 +151,11 @@ class RequestData
 		$output = [];
 
 		foreach ($input AS $key => $data) {
+			if ($data['error'] === UPLOAD_ERR_NO_FILE) {
+				// empty input
+				continue;
+			}
+
 			if (is_array($data['name'])) {
 				foreach ($data['name'] AS $index => $value) {
 					$output[$key][$index] = new RequestDataUploadedFile($data['name'][$index], $data['type'][$index], $data['tmp_name'][$index], $data['error'][$index], $data['size'][$index]);

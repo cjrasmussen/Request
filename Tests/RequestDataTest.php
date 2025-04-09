@@ -186,16 +186,25 @@ class RequestDataTest extends TestCase
 					'file3' => 4096,
 				],
 			],
+			'fileNone' => [
+				'name' => '',
+				'type' => '',
+				'tmp_name' => '',
+				'error' => UPLOAD_ERR_NO_FILE,
+				'size' => 0,
+			],
 		];
 
 		$requestData = new RequestData([], [], [], $files, [], []);
 
+		$this->assertTrue($requestData->files->has('file1'));
 		$this->assertEquals($files['file1']['name'], $requestData->files->get('file1')->name);
 		$this->assertEquals($files['file1']['type'], $requestData->files->get('file1')->type);
 		$this->assertEquals($files['file1']['tmp_name'], $requestData->files->get('file1')->tmpName);
 		$this->assertEquals($files['file1']['error'], $requestData->files->get('file1')->error);
 		$this->assertEquals($files['file1']['size'], $requestData->files->get('file1')->size);
 
+		$this->assertTrue($requestData->files->has('fileArray'));
 		$this->assertEquals($files['fileArray']['name']['file2'], $requestData->files->get('fileArray')['file2']->name);
 		$this->assertEquals($files['fileArray']['type']['file2'], $requestData->files->get('fileArray')['file2']->type);
 		$this->assertEquals($files['fileArray']['tmp_name']['file2'], $requestData->files->get('fileArray')['file2']->tmpName);
@@ -207,6 +216,8 @@ class RequestDataTest extends TestCase
 		$this->assertEquals($files['fileArray']['tmp_name']['file3'], $requestData->files->get('fileArray')['file3']->tmpName);
 		$this->assertEquals($files['fileArray']['error']['file3'], $requestData->files->get('fileArray')['file3']->error);
 		$this->assertEquals($files['fileArray']['size']['file3'], $requestData->files->get('fileArray')['file3']->size);
+
+		$this->assertFalse($requestData->files->has('fileNone'));
 	}
 
 	public function testIsWebRequest_true(): void
